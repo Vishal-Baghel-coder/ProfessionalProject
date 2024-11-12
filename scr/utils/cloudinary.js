@@ -2,17 +2,20 @@
 import fs from 'fs'
 
 cloudinary.config({ 
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
-    api_key: process.env.CLOUDINARY_API_KEY, 
-    api_secret: process.env.CLOUDINARY_API_SECRET // Click 'View API Keys' above to copy your API secret
+    cloud_name:'drsuunbou', 
+    api_key: '278281991325817', 
+    api_secret: '-sMlTQG4za92D9agGEczwo2pxg8'
 });
 
 const uploadOnCloudinary = async (localFilePath) =>{
+    console.log("Enter in uploadOnCloudinary",localFilePath)
     try{
         if(!localFilePath) return null
         //uplaod the file on cloudinary
-        cloudinary.uploader.upload(localFilePath,{
+        const response  = await cloudinary.uploader.upload(localFilePath,{
             resource_type:'auto'
+        }).catch((error) =>{
+            console.log("Error is",error);
         })
         //file has been uploaded 
         console.log("file is uploaded on cloudinary",response.url);
