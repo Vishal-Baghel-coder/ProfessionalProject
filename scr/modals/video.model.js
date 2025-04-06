@@ -4,7 +4,7 @@ import mongooseAggregatePaginate from 'mongoose-aggregate-paginate-v2'
 const VideoSchema = new mongoose.Schema(
     {
         videoFile: {
-            type: String, //cloudnary
+            type: String, //cloudinary
             required: [true, 'Viedo is required'],
         },
         title: {
@@ -35,7 +35,7 @@ const VideoSchema = new mongoose.Schema(
             type: Schema.Types.ObjectId,
             ref: "User"
         }
-    }
+    }, { timestamps: true }
 )
 
 

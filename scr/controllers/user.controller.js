@@ -1,8 +1,8 @@
 ﻿import { asyncHandler } from "../utils/asyncHandler.js";
-import { ApiError } from '../utils/Apierror.js';
+import { ApiError } from '../utils/ApiError.js';
 import { User } from '../modals/user.model.js';
 import { uploadOnCloudinary } from '../utils/cloudinary.js'
-import { ApiResponse } from '../utils/Apiresponse.js'
+import { ApiResponse } from '../utils/ApiResponse.js'
 import jwt from "jsonwebtoken"
 import req from "express/lib/request.js";
 import mongoose from "mongoose";
@@ -252,7 +252,7 @@ const updateuserAvatar = asyncHandler(async (req, res) => {
     const avatar = await uploadOnCloudinary(avatarLocalPath)
 
     if (!avatar.url) {
-        throw new ApiError(400, "Error whilw uploading on avatar")
+        throw new ApiError(400, "Error while uploading on avatar")
     }
 
     const user = await User.findByIdAndUpdate(
@@ -363,7 +363,7 @@ const getWatchHistory = asyncHandler(async (req, res) => {
     const user = await User.aggregate([
         {
             $match: {
-                _id: new mongoose.Types.ObjectId(req.user._id)
+                _id: new mongoose.Schema.Types.ObjectId(req.user._id)
             }
         },
         {
